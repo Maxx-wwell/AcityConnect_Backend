@@ -2,11 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "type": "module",
-  "main": "dist/src/server.js",
+  "main": "dist/server.js",
   "scripts": {
     "build": "tsc",
     "postinstall": "prisma generate",
-    "start": "tsx dist/src/server.js",
+    "start": "tsx dist/server.js",
     "dev": "tsx --watch src/server.ts",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
