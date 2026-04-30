@@ -5,7 +5,7 @@ import {
     attachSignedUrlsToListings,
 } from "../../shared/utils/mediaUploader";
 import * as listingsRepo from "./repo/listings.repo";
-import { CreateListingInput, UpdateListingInput } from "./repo/listings.types";
+import { CreateListingInput, UpdateListingInput, DeleteListingInput } from "./repo/listings.types";
 
 export const listingsService = {
     createListing: async (input: CreateListingInput) => {
@@ -23,8 +23,8 @@ export const listingsService = {
     updateListing: async (input: UpdateListingInput) => {
         return await listingsRepo.updateListing(input);
     },
-    deleteListing: async (id: string) => {
-        return await listingsRepo.deleteListing(id);
+    deleteListing: async (input: DeleteListingInput) => {
+        return await listingsRepo.deleteListing(input);
     },
     listListings: async (filters: {
         listingType?: ListingType;

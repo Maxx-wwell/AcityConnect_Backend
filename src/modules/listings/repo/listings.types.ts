@@ -22,5 +22,11 @@ export const updateListingSchema = z.object({
   }),
 });
 
+export const deleteListingSchema = z.object({
+  id: z.uuid(),
+  userid: z.uuid(),
+});
+
 export type CreateListingInput = z.infer<typeof createListingSchema>;
 export type UpdateListingInput = z.infer<typeof updateListingSchema>;
+export type DeleteListingInput = z.infer<typeof deleteListingSchema>;

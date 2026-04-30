@@ -5,7 +5,7 @@ import {
   type Prisma,
 } from "@prisma/client";
 import prisma from "../../../config/prisma";
-import { CreateListingInput, UpdateListingInput } from "./listings.types";
+import { CreateListingInput, UpdateListingInput, DeleteListingInput } from "./listings.types";
 
 export const createListing = async (input: CreateListingInput) => {
   return prisma.$transaction(async (tx) => {
@@ -54,9 +54,9 @@ export const updateListing = async (input: UpdateListingInput) => {
     return listing;
 };
 
-export const deleteListing = async (id: string) => {
+export const deleteListing = async (input: DeleteListingInput) => {
     const listing = await prisma.listing.delete({
-        where: { id },
+        where: { id: input.id, userId: input.userid  },
     });
     return listing;
 };

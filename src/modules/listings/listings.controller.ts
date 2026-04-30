@@ -111,8 +111,9 @@ export const updateListingController = async (req: Request, res: Response) => {
 
 export const deleteListingController = async (req: Request, res: Response) => {
     const id = req.params.id as string;
+    const userId = req.query.userId as string;
     try {
-    const listing = await listingsService.deleteListing(id);
+    const listing = await listingsService.deleteListing({ id, userid: userId });
     res.status(200).json({ message: "Listing deleted successfully", listing });
 } catch (error) { 
     throw new Error(error instanceof Error ? error.message : "Failed to delete listing");
