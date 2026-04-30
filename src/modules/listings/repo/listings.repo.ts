@@ -55,10 +55,16 @@ export const updateListing = async (input: UpdateListingInput) => {
 };
 
 export const deleteListing = async (input: DeleteListingInput) => {
-    const listing = await prisma.listing.delete({
-        where: { id: input.id, userId: input.userid  },
+    return prisma.$transaction(async (tx) => {
+        await tx.trade.deleteMany({ where: { listingId: input.id } });
+        await tx.report.deleteMany({ where: { listingId: input.id } });
+        await tx.adminAction.deleteMany({ where: { listingId: input.id } });
+
+        const listing = await tx.listing.delete({
+            where: { id: input.id, userId: input.userid },
+        });
+        return listing;
     });
-    return listing;
 };
 
 export const listListings = async (filters: {
